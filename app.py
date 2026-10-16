@@ -10,25 +10,25 @@ if "login_ok" not in st.session_state:
 if "page" not in st.session_state:
     st.session_state.page = "线上编码工具"
 
-# ===================== 页面CSS全局样式 =====================
+# ===================== CSS =====================
 st.markdown("""
 <style>
-/* 页面整体背景 左右分块深蓝色+白色 */
+/* 左右对半背景 */
 .stApp {
     background: linear-gradient(90deg, #0f3460 42%, #ffffff 42%);
 }
-/* 隐藏默认streamlit顶部栏 */
 header {visibility:hidden;}
 
-/* 登录容器：整体缩至60%宽度 + 水平居中，透明背景无框 */
+/* 登录卡片：固定宽度，居中，圆角+阴影，参考图样式 */
 .login-card{
-    background:transparent;
-    box-shadow: none;
-    border-radius:0;
-    padding:24px 28px;
-    width:60%;
+    background:#ffffff;
+    box-shadow: 0 8px 30px rgba(0,0,0,0.12);
+    border-radius:16px;
+    padding:36px;
+    width: 520px;
     margin: 12vh auto 0 auto;
 }
+
 .login-title{
     font-size:24px;
     font-weight:bold;
@@ -40,15 +40,24 @@ header {visibility:hidden;}
 .login-subtitle{
     color:#555;
     font-size:14px;
-    margin-bottom:16px;
+    margin-bottom:24px;
 }
 
-/* 强制登录里面所有输入框、按钮宽度100%（相对于login-card，不是整个页面） */
-.login-card .st-text-input, .login-card .st-button {
-    width:100% !important;
+/* ✅ 关键：限制输入框最大宽度，不让撑满屏幕 */
+.login-card .stTextInput {
+    max-width:440px !important;
+}
+.login-card .stButton {
+    max-width:440px !important;
 }
 
-/* 导航按钮样式（登录成功后的顶部导航高亮） */
+/* 登录按钮样式，蓝色和参考图一致 */
+.login-card button {
+    background-color:#2b78e4 !important;
+    color:white !important;
+}
+
+/* 导航按钮（登录后页面） */
 div.stButton > button {
     width:100%;
     height:42px;
@@ -65,12 +74,9 @@ div.stButton > button {
 # ========== 登录页面 ==========
 if not st.session_state.login_ok:
     st.markdown('<div class="login-card">', unsafe_allow_html=True)
-    st.markdown('<div class="login-title"><span style="background:#2b78e4;color:white;border-radius:8px;width:32px;height:32px;text-align:center;line-height:32px;">工</span>工具箱</div>', unsafe_allow_html=True)
-    st.markdown('<div class="login-subtitle">商品资料与线上编码管理平台</div>', unsafe_allow_html=True)
-    st.markdown("**登录系统**")
-    st.markdown("<span style='color:#666;font-size:13px;'>使用管理员分配的账号进入系统</span>", unsafe_allow_html=True)
-    # ========= 删掉 st.divider() 就去掉那条横线 =========
-    # st.divider()
+    st.markdown("## 登录系统")
+    st.markdown("<span style='color:#666;font-size:14px;'>使用管理员分配的账号进入系统</span>", unsafe_allow_html=True)
+    st.markdown("<br>", unsafe_allow_html=True)
 
     username = st.text_input("*登录账号", placeholder="支持中文、字母或数字，不能包含空格")
     pwd = st.text_input("*密码", placeholder="至少8位", type="password")
@@ -84,12 +90,9 @@ if not st.session_state.login_ok:
             st.error("账号或密码错误！")
     st.markdown('</div>', unsafe_allow_html=True)
 
-# ========== 全部后台页面都放在这个else里面 ==========
+# ========== 登录成功后的后台页面 ==========
 else:
-    # 顶部导航栏布局
     nav_col1, nav_col2, nav_col3 = st.columns([1,1,1])
-
-    # 导航按钮1：线上编码工具
     with nav_col1:
         if st.session_state.page == "线上编码工具":
             st.markdown('<div class="nav-active">', unsafe_allow_html=True)
@@ -100,7 +103,6 @@ else:
             st.session_state.page = "线上编码工具"
             st.rerun()
 
-    # 导航按钮2：利润测算
     with nav_col2:
         if st.session_state.page == "利润测算":
             st.markdown('<div class="nav-active">', unsafe_allow_html=True)
@@ -111,16 +113,14 @@ else:
             st.session_state.page = "利润测算"
             st.rerun()
 
-    # 导航按钮3：退出登录
     with nav_col3:
         logout_btn = st.button("退出登录")
         if logout_btn:
             st.session_state.login_ok = False
             st.rerun()
 
+    st.divider()
 
-
-    # 页面渲染
     if st.session_state.page == "线上编码工具":
         import page1
         page1.run()
