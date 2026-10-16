@@ -13,33 +13,22 @@ if "page" not in st.session_state:
 # ===================== 页面CSS全局样式 =====================
 st.markdown("""
 <style>
-/* 隐藏页面顶部多余白色空框 */
-.block-container > div:first-child {
-    display: none;
-}
 /* 页面整体背景 左右分块深蓝色+白色 */
 .stApp {
     background: linear-gradient(90deg, #0f3460 42%, #ffffff 42%);
 }
-
 /* 隐藏默认streamlit顶部栏 */
 header {visibility:hidden;}
 
-/* 隐藏页面顶部多余白色空框 */
-.block-container > div:first-child {
-    display: none;
-}
-
-/* 登录卡片：减少padding，缩短高度 */
+/* 登录区域：取消白色背景、圆角、阴影！！ */
 .login-card{
-    background:#ffffff;
-    border-radius:18px;
-    box-shadow: 0 8px 32px rgba(0,0,0,0.08);
+    background:transparent;
+    box-shadow: none;
+    border-radius:0;
     padding:24px 28px;
     max-width:420px;
     margin: 12vh auto 0 auto;
 }
-
 .login-title{
     font-size:24px;
     font-weight:bold;
@@ -48,20 +37,17 @@ header {visibility:hidden;}
     align-items:center;
     gap:10px;
 }
-
 .login-subtitle{
     color:#555;
     font-size:14px;
     margin-bottom:16px;
 }
-
 /* 导航按钮样式（登录成功后的顶部导航高亮） */
 div.stButton > button {
     width:100%;
     height:42px;
     font-size:16px;
 }
-
 .nav-active button {
     background-color:#1f6ecd !important;
     color:white !important;
@@ -73,10 +59,10 @@ div.stButton > button {
 # ========== 登录页面 ==========
 if not st.session_state.login_ok:
     st.markdown('<div class="login-card">', unsafe_allow_html=True)
-    st.markdown('<div class="login-title"><span style="background:#2b78e4;color:white;border-radius:8px;width:36px;height:36px;text-align:center;line-height:36px;">工</span>工具箱</div>', unsafe_allow_html=True)
+    st.markdown('<div class="login-title"><span style="background:#2b78e4;color:white;border-radius:8px;width:32px;height:32px;text-align:center;line-height:32px;">工</span>工具箱</div>', unsafe_allow_html=True)
     st.markdown('<div class="login-subtitle">商品资料与线上编码管理平台</div>', unsafe_allow_html=True)
     st.markdown("**登录系统**")
-    st.markdown("<span style='color:#666;font-size:14px;'>使用管理员分配的账号进入系统</span>", unsafe_allow_html=True)
+    st.markdown("<span style='color:#666;font-size:13px;'>使用管理员分配的账号进入系统</span>", unsafe_allow_html=True)
     st.divider()
 
     username = st.text_input("*登录账号", placeholder="支持中文、字母或数字，不能包含空格")
@@ -91,7 +77,7 @@ if not st.session_state.login_ok:
             st.error("账号或密码错误！")
     st.markdown('</div>', unsafe_allow_html=True)
 
-# ========== 【重点！全部后台页面都放在这个else里面】 ==========
+# ========== 全部后台页面都放在这个else里面 ==========
 else:
     # 顶部导航栏布局
     nav_col1, nav_col2, nav_col3 = st.columns([1,1,1])
