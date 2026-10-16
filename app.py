@@ -95,10 +95,11 @@ else:
     st.divider()
 
     # 页面渲染
-   if elif st.session_state.page == "线上编码工具":
-        import page1
-        page1.run()
-    elif st.session_state.page == "利润测算":
-        import page2
-        page2.run()
+   # 页面渲染
+if st.session_state.page == "线上编码工具":
+    import page1
+    page1.run()
+elif st.session_state.page == "利润测算":
+    import page2
+    page2.run()
 
