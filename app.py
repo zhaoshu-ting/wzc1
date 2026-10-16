@@ -1,8 +1,8 @@
 import streamlit as st
 
 # ========== 账号配置 ==========
-USER_ACCOUNT = "admin"
-USER_PASSWORD = "12345678"
+USER_ACCOUNT = "wzc"
+USER_PASSWORD = "123"
 
 # 初始化session
 if "login_ok" not in st.session_state:
@@ -95,7 +95,7 @@ else:
     st.divider()
 
     # 页面渲染
-    elif st.session_state.page == "线上编码工具":
+   if elif st.session_state.page == "线上编码工具":
         import page1
         page1.run()
     elif st.session_state.page == "利润测算":
