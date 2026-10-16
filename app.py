@@ -13,40 +13,55 @@ if "page" not in st.session_state:
 # ===================== 页面CSS全局样式 =====================
 st.markdown("""
 <style>
+/* 隐藏页面顶部多余白色空框 */
+.block-container > div:first-child {
+    display: none;
+}
 /* 页面整体背景 左右分块深蓝色+白色 */
 .stApp {
     background: linear-gradient(90deg, #0f3460 42%, #ffffff 42%);
 }
+
 /* 隐藏默认streamlit顶部栏 */
 header {visibility:hidden;}
-/* 登录卡片样式：白色圆角阴影悬浮卡片 */
+
+/* 隐藏页面顶部多余白色空框 */
+.block-container > div:first-child {
+    display: none;
+}
+
+/* 登录卡片：减少padding，缩短高度 */
 .login-card{
     background:#ffffff;
     border-radius:18px;
     box-shadow: 0 8px 32px rgba(0,0,0,0.08);
-    padding:36px 32px;
+    padding:24px 28px;
     max-width:420px;
-    margin: 18vh auto 0 auto;
+    margin: 12vh auto 0 auto;
 }
+
 .login-title{
-    font-size:26px;
+    font-size:24px;
     font-weight:bold;
     color:#111827;
     display:flex;
     align-items:center;
     gap:10px;
 }
+
 .login-subtitle{
     color:#555;
     font-size:14px;
-    margin-bottom:28px;
+    margin-bottom:16px;
 }
+
 /* 导航按钮样式（登录成功后的顶部导航高亮） */
 div.stButton > button {
     width:100%;
     height:42px;
     font-size:16px;
 }
+
 .nav-active button {
     background-color:#1f6ecd !important;
     color:white !important;
