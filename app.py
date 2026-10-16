@@ -2,7 +2,7 @@ import streamlit as st
 
 # ========== 账号配置 ==========
 USER_ACCOUNT = "wzc"
-USER_PASSWORD = "123"
+USER_PASSWORD = "12345678"
 
 # 初始化session
 if "login_ok" not in st.session_state:
@@ -20,13 +20,13 @@ st.markdown("""
 /* 隐藏默认streamlit顶部栏 */
 header {visibility:hidden;}
 
-/* 登录区域：取消白色背景、圆角、阴影！！ */
+/* 登录容器：整体缩至60%宽度 + 水平居中，透明背景无框 */
 .login-card{
     background:transparent;
     box-shadow: none;
     border-radius:0;
     padding:24px 28px;
-    max-width:420px;
+    width:60%;
     margin: 12vh auto 0 auto;
 }
 .login-title{
@@ -42,6 +42,12 @@ header {visibility:hidden;}
     font-size:14px;
     margin-bottom:16px;
 }
+
+/* 强制登录里面所有输入框、按钮宽度100%（相对于login-card，不是整个页面） */
+.login-card .st-text-input, .login-card .st-button {
+    width:100% !important;
+}
+
 /* 导航按钮样式（登录成功后的顶部导航高亮） */
 div.stButton > button {
     width:100%;
@@ -63,7 +69,8 @@ if not st.session_state.login_ok:
     st.markdown('<div class="login-subtitle">商品资料与线上编码管理平台</div>', unsafe_allow_html=True)
     st.markdown("**登录系统**")
     st.markdown("<span style='color:#666;font-size:13px;'>使用管理员分配的账号进入系统</span>", unsafe_allow_html=True)
-    st.divider()
+    # ========= 删掉 st.divider() 就去掉那条横线 =========
+    # st.divider()
 
     username = st.text_input("*登录账号", placeholder="支持中文、字母或数字，不能包含空格")
     pwd = st.text_input("*密码", placeholder="至少8位", type="password")
@@ -111,7 +118,7 @@ else:
             st.session_state.login_ok = False
             st.rerun()
 
-    st.divider()
+
 
     # 页面渲染
     if st.session_state.page == "线上编码工具":
