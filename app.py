@@ -17,30 +17,6 @@ st.markdown("""
 .stApp {
     background: linear-gradient(90deg, #0f3460 42%, #ffffff 42%);
 }
-/* 隐藏默认streamlit顶部栏 */
-header {visibility:hidden;}
-/* 登录卡片样式：白色圆角阴影悬浮卡片 */
-.login-card{
-    background:#ffffff;
-    border-radius:18px;
-    box-shadow: 0 8px 32px rgba(0,0,0,0.08);
-    padding:36px 32px;
-    max-width:420px;
-    margin: 18vh auto 0 auto;
-}
-.login-title{
-    font-size:26px;
-    font-weight:bold;
-    color:#111827;
-    display:flex;
-    align-items:center;
-    gap:10px;
-}
-.login-subtitle{
-    color:#555;
-    font-size:14px;
-    margin-bottom:28px;
-}
 /* 导航按钮样式（登录成功后的顶部导航高亮） */
 div.stButton > button {
     width:100%;
@@ -59,10 +35,10 @@ div.stButton > button {
 if not st.session_state.login_ok:
     # 登录卡片容器
     st.markdown('<div class="login-card">', unsafe_allow_html=True)
-    st.markdown('<div class="login-title"><span style="background:#2b78e4;color:white;border-radius:8px;width:36px;height:36px;text-align:center;line-height:36px;">工</span>工具箱</div>', unsafe_allow_html=True)
+    st.markdown('<div class="login-title"><span style="background:#2b78e4;color:white;border-radius:8px;width:15px;height:36px;text-align:center;line-height:15px;">工</span>工具箱</div>', unsafe_allow_html=True)
     st.markdown('<div class="login-subtitle">商品资料与线上编码管理平台</div>', unsafe_allow_html=True)
     st.markdown("**登录系统**")
-    st.markdown("<span style='color:#666;font-size:14px;'>使用管理员分配的账号进入系统</span>", unsafe_allow_html=True)
+    st.markdown("<span style='color:#666;font-size:13px;'>使用管理员分配的账号进入系统</span>", unsafe_allow_html=True)
     st.divider()
 
     username = st.text_input("*登录账号", placeholder="支持中文、字母或数字，不能包含空格")
@@ -85,21 +61,10 @@ else:
         st.session_state.page = "线上编码工具"
 
     # 顶部导航栏布局
-    nav_col1, nav_col2, nav_col3, nav_col4 = st.columns([1,1,1,6])
-
-    # 导航按钮1：班尼路商品资料
+    nav_col1, nav_col2, nav_col3 = st.columns([1,1,1])
+    
+    # 导航按钮1：线上编码工具
     with nav_col1:
-        if st.session_state.page == "班尼路商品资料":
-            st.markdown('<div class="nav-active">', unsafe_allow_html=True)
-        btn_ban = st.button("班尼路商品资料")
-        if st.session_state.page == "班尼路商品资料":
-            st.markdown('</div>', unsafe_allow_html=True)
-        if btn_ban:
-            st.session_state.page = "班尼路商品资料"
-            st.rerun()
-
-    # 导航按钮2：线上编码工具
-    with nav_col2:
         if st.session_state.page == "线上编码工具":
             st.markdown('<div class="nav-active">', unsafe_allow_html=True)
         btn_code = st.button("线上编码工具")
@@ -109,8 +74,8 @@ else:
             st.session_state.page = "线上编码工具"
             st.rerun()
 
-    # 导航按钮3：利润测算
-    with nav_col3:
+    # 导航按钮2：利润测算
+    with nav_col2:
         if st.session_state.page == "利润测算":
             st.markdown('<div class="nav-active">', unsafe_allow_html=True)
         btn_profit = st.button("利润测算")
@@ -121,7 +86,7 @@ else:
             st.rerun()
 
     # 右上角退出登录
-    with nav_col4:
+    with nav_col3:
         logout_btn = st.button("退出登录")
         if logout_btn:
             st.session_state.login_ok = False
@@ -130,9 +95,6 @@ else:
     st.divider()
 
     # 页面渲染
-    if st.session_state.page == "班尼路商品资料":
-        st.title("班尼路商品资料")
-        st.info("该模块待开发，可以后续添加功能")
     elif st.session_state.page == "线上编码工具":
         import page1
         page1.run()
