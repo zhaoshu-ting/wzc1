@@ -92,30 +92,53 @@ if not st.session_state.login_ok:
 
 # ========== 登录成功后的后台页面 ==========
 else:
-    nav_col1, nav_col2, nav_col3 = st.columns([1,1,1])
+    st.markdown("""
+    <style>
+    .stApp {
+        background: #ffffff !important;
+    }
+
+    .custom-nav-bar {
+        background-color: #ffffff;
+        border-bottom: 3px solid #2b78e4;
+        padding: 14px 24px;
+        display: flex;
+        align-items: center;
+        gap: 18px;
+        box-shadow: 0 2px 6px rgba(0,0,0,0.04);
+    }
+
+    .main .block-container {
+        font-size: 17px;
+    }
+
+    .main h1 {
+        font-size: 30px;
+    }
+
+    .main h2 {
+        font-size: 24px;
+    }
+
+    header {visibility:hidden;}
+    </style>
+    """, unsafe_allow_html=True)
+
+    # 顶部蓝色条痕导航区
+    nav_col1, nav_col2, nav_col3, nav_col4 = st.columns([1,1,1,8])
+
     with nav_col1:
-        if st.session_state.page == "线上编码工具":
-            st.markdown('<div class="nav-active">', unsafe_allow_html=True)
-        btn_code = st.button("线上编码工具")
-        if st.session_state.page == "线上编码工具":
-            st.markdown('</div>', unsafe_allow_html=True)
-        if btn_code:
+        if st.button("线上编码工具"):
             st.session_state.page = "线上编码工具"
             st.rerun()
 
     with nav_col2:
-        if st.session_state.page == "利润测算":
-            st.markdown('<div class="nav-active">', unsafe_allow_html=True)
-        btn_profit = st.button("利润测算")
-        if st.session_state.page == "利润测算":
-            st.markdown('</div>', unsafe_allow_html=True)
-        if btn_profit:
+        if st.button("利润测算"):
             st.session_state.page = "利润测算"
             st.rerun()
 
-    with nav_col3:
-        logout_btn = st.button("退出登录")
-        if logout_btn:
+    with nav_col4:
+        if st.button("退出登录"):
             st.session_state.login_ok = False
             st.rerun()
 
