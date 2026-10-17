@@ -11,6 +11,69 @@ if "page" not in st.session_state:
     st.session_state.page = "线上编码工具"
 
 # ===================== CSS =====================
+st.markdown("""
+<style>
+/* 全局页面纯白背景，覆盖所有外层深色 */
+.stApp {
+    background-color: #FFFFFF !important;
+}
+/* 清除所有列的背景色（解决左右分栏蓝底色） */
+div[data-testid="stHorizontalBlock"] > div {
+    background: transparent !important;
+}
+div[data-testid="stColumn"] {
+    background: transparent !important;
+}
+/* 主内容容器字体放大 */
+.block-container {
+    font-size:18px !important;
+}
+.block-container h1 {
+    font-size:32px !important;
+}
+.block-container h2 {
+    font-size:26px !important;
+}
+.block-container h3 {
+    font-size:22px !important;
+}
+/* 原生顶部header隐藏 */
+header {
+    visibility:hidden !important;
+}
+/* ========== 自定义导航栏 ========== */
+.nav-wrap{
+    width:100%;
+    padding:15px 2rem;
+    border-bottom:4px solid #2563eb; /*蓝色底条*/
+    display:flex;
+    align-items:center;
+    gap:24px;
+    box-sizing:border-box;
+}
+.nav-item{
+    font-size:19px;
+    font-weight:600;
+    color:#222;
+    cursor:pointer;
+}
+.nav-item:hover{
+    color:#2563eb;
+}
+.nav-logout{
+    margin-left:auto;
+}
+</style>
+""",unsafe_allow_html=True)
+
+# 导航栏HTML（纯flex，左对齐，不受streamlit列影响）
+st.markdown("""
+<div class="nav-wrap">
+    <div class="nav-item" onclick="window.location.search='?page=线上编码工具'">线上编码工具</div>
+    <div class="nav-item" onclick="window.location.search='?page=利润测算'">利润测算</div>
+    <div class="nav-item nav-logout" onclick="window.location.search='?logout=1'">退出登录</div>
+</div>
+""",unsafe_allow_html=True)
 
 /* 登录卡片：固定宽度，居中，圆角+阴影，参考图样式 */
 .login-card{
