@@ -3,6 +3,31 @@ import pandas as pd
 from io import BytesIO
 
 def run():
+    # ========= 新增这一段！！放在最开头 =========
+    st.markdown("""
+    <style>
+    /* 清除本页面所有列背景，变成透明 */
+    div[data-testid="stHorizontalBlock"] > div {
+        background-color: transparent !important;
+    }
+    div[data-testid="stColumn"]{
+        background: transparent !important;
+    }
+    .stAppViewContainer{
+        background:#ffffff !important;
+    }
+    .block-container{
+        font-size:18px !important;
+    }
+    </style>
+    """,unsafe_allow_html=True)
+
+    # 下面是你原来的代码不动
+    st.title("线上编码工具")
+    st.markdown("上传线上商品表，按商品编码匹配成本价，生成A表和B表。")
+    col1, col2 = st.columns([2,1])
+    ...
+
     st.title("线上编码工具")
     st.markdown("上传线上商品表，按商品编码匹配成本价，生成A表和B表。")
 
