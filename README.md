@@ -11,13 +11,6 @@ if "page" not in st.session_state:
     st.session_state.page = "线上编码工具"
 
 # ===================== CSS =====================
-st.markdown("""
-<style>
-/* 左右对半背景 */
-.stApp {
-    background: linear-gradient(90deg, #0f3460 42%, #ffffff 42%);
-}
-header {visibility:hidden;}
 
 /* 登录卡片：固定宽度，居中，圆角+阴影，参考图样式 */
 .login-card{
